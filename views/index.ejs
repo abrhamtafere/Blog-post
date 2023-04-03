@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A bolog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    img{
+      width: 100%;
+      height: auto;
+    }
+
+    .logo{
+      width: 20rem;
+      align-items: center;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container row d-flex m-auto">
+    <div class="text-center pt-5">
+      <img src="/images/logo.svg" class="logo " />
+      <p class="text-muted">lifecyle | way of life | success</p>
+    </div>
+    <div class="col-12 pe-5 pb-5">
+      <a href="/blogs/new" class="btn btn-success col-4 col-lg-2 fs-4"><i class="bi bi-plus-circle-fill fs-3" ></i> New Blog</a>
+    </div>
+
+    <% if(blogs.length < 1) { %>
+      <p class="display-6 text-white">There is no post, create a new one!</p>
+    <% }; %>
+
+    <% blogs.forEach(blog => { %>
+
+          <div class="card mb-3 m-2 col-5 ">
+            <div class="row g-0">
+              <div class="col-6">
+                <img
+                  src="/uploads/images/<%= blog.img %>"
+                  alt="Trendy Pants and Shoes"
+                  class="img-fluid rounded-start pt-5"
+                />
+              </div>
+              <div class="col-6">
+                <div class="dropdown text-end">
+                  <a class=""
+                    type="button"
+                    id="dropdownMenuicon"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical text-dark"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
+                    <li><a class="dropdown-item rounded" href="/blogs/edit/<%= blog.id %>"> <i class="bi bi-pencil-square bg-primary text-white fs-3"></i> Edit</a></li>
+                    <li>
+                      <form action="/blogs/<%= blog.id %>?_method=DELETE" method="post">
+                        <button type="submit" class="dropdown-item "> <i class="bi bi-archive-fill bg-danger text-white fs-3"></i> Delete</button>
+                      </form>
+                     </li>
+                    </ul>
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= blog.title %></h5>
+                  <p class="card-text"><%= blog.description %></p>
+                  <div class="card-text row">
+                    <div class="row w-100% h-30% col" >
+                      <div class="col " >
+                        <img src="/uploads/images/<%= blog.img %>" class="rounded-circle mb-3 col avater" 
+                        alt="Avatar" style="border-radius: 100px ; width: 50px; height: 50px"/>
+                      </div>
+                      
+                    
+                      <div class="col">
+                        <h5 class="mb-2 "><strong><%= blog.author %></strong></h5>
+                    <p class="text-muted"><%= blog.createdAt %></p>
+                      </div>
+                    </div>
+                    <div class="text-end">
+                      <a  href="blogs/<%= blog.id %>" >
+                        <i class="bi bi-box-arrow-in-up-right fs-3"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>                
+              </div>
+            </div>
+          </div>
+
+    <% }) %>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
